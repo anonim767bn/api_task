@@ -1,0 +1,20 @@
+name: Проверка
+on: [push]
+jobs:
+  linter_1:
+    name: Линтер
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Установка Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10.6
+    - name: Установка зависимостей
+      run: |
+        sudo apt install flake8
+        python3 -m pip install --upgrade pip
+        python3 -m pip install flask
+    - name: Flake8
+      run: flake8 ./
+  
